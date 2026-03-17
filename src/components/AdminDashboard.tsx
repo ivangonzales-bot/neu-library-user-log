@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/authContext';
-import { MOCK_VISITORS, COLLEGES, VISIT_REASONS, VisitorEntry } from '@/lib/mockData';
+import { COLLEGES, VISIT_REASONS, VisitorEntry } from '@/lib/mockData';
+import { getAllLogs, subscribe } from '@/lib/visitorLogStore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
