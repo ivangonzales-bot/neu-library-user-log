@@ -52,7 +52,7 @@ export default function AdminDashboard() {
       if (employeeFilter === 'staff' && v.employeeType !== 'staff') return false;
       return true;
     });
-  }, [dateFilter, startDate, endDate, reasonFilter, collegeFilter, employeeFilter]);
+  }, [allVisitors, dateFilter, startDate, endDate, reasonFilter, collegeFilter, employeeFilter]);
 
   const stats = useMemo(() => {
     const total = filteredVisitors.length;
