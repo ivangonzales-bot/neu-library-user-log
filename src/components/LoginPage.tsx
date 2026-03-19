@@ -25,7 +25,7 @@ export default function LoginPage() {
       setError('Please use your NEU email (@neu.edu.ph)');
       return;
     }
-    if (password.length < 4) {
+    if (role === 'admin' && password.length < 4) {
       setError('Please enter a valid password');
       return;
     }
