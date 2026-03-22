@@ -25,6 +25,7 @@ export default function AdminDashboard() {
   const [reasonFilter, setReasonFilter] = useState<string>('all');
   const [collegeFilter, setCollegeFilter] = useState<string>('all');
   const [allVisits, setAllVisits] = useState<VisitRecord[]>([]);
+  const [blockedUsers, setBlockedUsers] = useState<BlockedUser[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [view, setView] = useState<View>('overview');
