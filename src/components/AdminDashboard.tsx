@@ -309,25 +309,48 @@ export default function AdminDashboard() {
                           <TableHead className="font-sans text-xs">User ID (Email)</TableHead>
                           <TableHead className="font-sans text-xs">Total Visits</TableHead>
                           <TableHead className="font-sans text-xs">Last Visit</TableHead>
-                          <TableHead className="font-sans text-xs">Action</TableHead>
+                          <TableHead className="font-sans text-xs">Status</TableHead>
+                          <TableHead className="font-sans text-xs">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {uniqueUsers.map(u => (
-                          <TableRow key={u.userId} className="cursor-pointer" onClick={() => { setSelectedUserId(u.userId); setView('student-detail'); }}>
-                            <TableCell className="font-sans text-sm font-medium">{u.userId}</TableCell>
-                            <TableCell>
-                              <Badge variant="secondary" className="font-sans text-xs">{u.visitCount}</Badge>
-                            </TableCell>
-                            <TableCell className="font-sans text-sm text-muted-foreground">
-                              {u.lastVisit ? format(new Date(u.lastVisit), 'MMM d, yyyy h:mm a') : '—'}
-                            </TableCell>
-                            <TableCell>
-                              <Button variant="ghost" size="sm" className="font-sans text-xs gap-1">
-                                <Eye className="w-3 h-3" /> View
-                              </Button>
-                            </TableCell>
-                          </TableRow>
+                        {uniqueUsers.map(u => {
+                          const isBlocked = blockedEmails.has(u.userId.toLowerCase());
+                          return (
+                            <TableRow key={u.userId}>
+                              <TableCell className="font-sans text-sm font-medium">{u.userId}</TableCell>
+                              <TableCell>
+                                <Badge variant="secondary" className="font-sans text-xs">{u.visitCount}</Badge>
+                              </TableCell>
+                              <TableCell className="font-sans text-sm text-muted-foreground">
+                                {u.lastVisit ? format(new Date(u.lastVisit), 'MMM d, yyyy h:mm a') : '—'}
+                              </TableCell>
+                              <TableCell>
+                                {isBlocked ? (
+                                  <Badge variant="destructive" className="font-sans text-xs">Blocked</Badge>
+                                ) : (
+                                  <Badge variant="outline" className="font-sans text-xs text-green-600">Active</Badge>
+                                )}
+                              </TableCell>
+                              <TableCell>
+                                <div className="flex gap-1">
+                                  <Button variant="ghost" size="sm" onClick={() => { setSelectedUserId(u.userId); setView('student-detail'); }} className="font-sans text-xs gap-1">
+                                    <Eye className="w-3 h-3" /> View
+                                  </Button>
+                                  {isBlocked ? (
+                                    <Button variant="ghost" size="sm" onClick={(e) => { e.stopPropagation(); handleUnblock(u.userId); }} className="font-sans text-xs gap-1 text-green-600 hover:text-green-700">
+                                      <CheckCircle className="w-3 h-3" /> Unblock
+                                    </Button>
+                                  ) : (
+                                    <Button variant="ghost" size="sm" onClick={(e) => { e.stopPropagation(); handleBlock(u.userId); }} className="font-sans text-xs gap-1 text-destructive hover:text-destructive">
+                                      <Ban className="w-3 h-3" /> Block
+                                    </Button>
+                                  )}
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
                         ))}
                         {uniqueUsers.length === 0 && (
                           <TableRow>
