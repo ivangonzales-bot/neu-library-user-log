@@ -9,7 +9,7 @@ import type { UserRole } from '@/lib/mockData';
 import { isUserBlocked } from '@/lib/blockedUsersStore';
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showAdmin, setShowAdmin] = useState(false);
