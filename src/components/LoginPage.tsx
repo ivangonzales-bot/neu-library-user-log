@@ -4,7 +4,7 @@ import { useAuth } from '@/lib/authContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { BookOpen, Lock, Mail, GraduationCap } from 'lucide-react';
+import { BookOpen, Lock, Mail, GraduationCap, Chrome } from 'lucide-react';
 import type { UserRole } from '@/lib/mockData';
 import { isUserBlocked } from '@/lib/blockedUsersStore';
 
