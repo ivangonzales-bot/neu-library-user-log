@@ -103,6 +103,22 @@ export default function LoginPage() {
                     <Button type="submit" disabled={loading} className="w-full h-11 font-sans font-semibold text-base shadow-lg shadow-primary/20">
                       {loading ? 'Signing in...' : 'Sign In'}
                     </Button>
+                    <div className="relative my-4">
+                      <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-border" /></div>
+                      <div className="relative flex justify-center text-xs"><span className="bg-card px-2 text-muted-foreground font-sans">or</span></div>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      disabled={loading}
+                      onClick={async () => {
+                        setLoading(true);
+                        try { await loginWithGoogle(); } catch { setError('Google sign-in failed. Please try again.'); } finally { setLoading(false); }
+                      }}
+                      className="w-full h-11 font-sans font-semibold text-base gap-2"
+                    >
+                      <Chrome className="w-5 h-5" /> Sign in with Google
+                    </Button>
                   </form>
                   <button
                     type="button"
