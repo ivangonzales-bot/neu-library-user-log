@@ -16,6 +16,15 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Pick up OAuth errors stored in sessionStorage
+  useEffect(() => {
+    const authError = sessionStorage.getItem('auth_error');
+    if (authError) {
+      setError(authError);
+      sessionStorage.removeItem('auth_error');
+    }
+  }, []);
+
   const role: UserRole = showAdmin ? 'admin' : 'user';
 
   const handleSubmit = async (e: React.FormEvent) => {
